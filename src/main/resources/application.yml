@@ -1,0 +1,47 @@
+server:
+  port: 8080
+spring:
+  data:
+    mongodb:
+      host: localhost
+      database: drnavalhabarbershop
+      port: 27017
+  servlet:
+    multipart:
+      max-file-size: 256MB
+      max-request-size: 256MB
+      enabled: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            provider: google
+            client-name: Login com Google
+            client-id: 853824473727-pct1egakt2dsui2cn8m5oc1n9efqdv9c.apps.googleusercontent.com
+            client-secret: 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
+            scopes:
+              - openid
+              - https://www.googleapis.com/auth/userinfo.profile
+              - https://www.googleapis.com/auth/userinfo.email
+            client-authentication-methods:
+              - client_secret_basic
+            authorization-grant-types:
+              - authorization_code
+              - refresh_token
+              - client_credentials
+
+          provider:
+            google:
+              user-name-attribute: email
+              authorization-uri: http://localhost:8080/oauth2/token
+
+
+
+logging:
+  level:
+    org:
+      springframework:
+        security:
+          - DEBUG
+          - oauth2: DEBUG

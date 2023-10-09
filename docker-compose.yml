@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  drnavalhabarbershop:
+    image: drnavalhabarbershop:1.0
+    container_name: drnavalhabarbershop
+    ports:
+      - 8081:8081
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongo-barbershop
+    ports:
+      - 27017:27017
+    networks:
+      - mongo-database
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express-barbershop
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_BASICAUTH_USERNAME=root
+      - ME_CONFIG_BASICAUTH_PASSWORD=root
+    ports:
+      - 8082:8081
+    networks:
+      - mongo-database
+
+networks:
+  mongo-database:
+    driver: bridge
