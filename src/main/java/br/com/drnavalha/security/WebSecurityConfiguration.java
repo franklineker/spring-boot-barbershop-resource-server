@@ -9,14 +9,15 @@ import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.session.SessionRegistry;
@@ -51,6 +52,11 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Slf4j
 public class WebSecurityConfiguration {
 
+    @Value("${config.uris.logout-uri}")
+    private String logoutUrl;
+
+    @Value("${config.uris.issuer-uri}")
+    private String issuerUri;
     private final UserRepository userRepository;
     @Bean
     @Order(1)
@@ -59,10 +65,7 @@ public class WebSecurityConfiguration {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
 
         http.cors(withDefaults());
-        http.csrf(c -> c.ignoringRequestMatchers(
-                "/auth/**",
-                "/client/**",
-                "/login"));
+        http.csrf(AbstractHttpConfigurer::disable);
 
         http
                 .getConfigurer(OAuth2AuthorizationServerConfigurer.class)
@@ -101,12 +104,11 @@ public class WebSecurityConfiguration {
                             .loginPage("/login")
                             .successHandler(authenticationSuccessHandler());
                 });
-        http.logout(logout -> logout.logoutSuccessUrl("http://localhost:4200/logout"));
+        http.logout(logout -> logout.logoutSuccessUrl(logoutUrl));
         http.csrf(c -> c.ignoringRequestMatchers(
                 "/auth/**",
                 "/client/**",
                 "/login"));
-
 
         return http.build();
     }
@@ -132,7 +134,7 @@ public class WebSecurityConfiguration {
 
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
-        return AuthorizationServerSettings.builder().issuer("http://localhost:8080").build();
+        return AuthorizationServerSettings.builder().issuer(issuerUri).build();
     }
 
     @Bean
