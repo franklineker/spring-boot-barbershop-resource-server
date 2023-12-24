@@ -1,0 +1,31 @@
+server:
+  port: 9000
+
+spring:
+  data:
+    mongodb:
+      uri: ${DATA_SOURCE_URI}
+      database: ${DATA_SOURCE_DBNAME}
+      port: ${DATA_SOURCE_PORT}
+    servlet:
+      multipart:
+        max-file-size: 256MB
+        max-request-size: 256MB
+        enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${JWT_URI}
+
+config:
+  uris:
+    angular-uri: ${ANGULAR_URI}
+
+logging:
+  level:
+    org:
+      springframework:
+        security:
+          - TRACE
+          - oauth2: TRACE
