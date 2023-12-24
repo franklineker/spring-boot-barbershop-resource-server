@@ -3,11 +3,9 @@ server:
 spring:
   data:
     mongodb:
-      host: ${DATA_SOURCE_URL}
+      uri: ${DATA_SOURCE_URI}
       database: ${DATA_SOURCE_DBNAME}
       port: ${DATA_SOURCE_PORT}
-#      username: ${DATA_SOURCE_USERNAME}
-#      password: ${DATA_SOURCE_PASSWORD}
     servlet:
       multipart:
         max-file-size: 256MB
