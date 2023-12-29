@@ -3,15 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dr. Navalha Login</title>
+    <title>Dr. Navalha Logout</title>
+    <link rel="stylesheet" href="" th:href="@{/assets/css/signout.css}">
 </head>
 <body>
+<img src="/assets/img/main-bg-image.jpeg" class="background">
 <div class="container">
     <form method="post" th:action="@{/logout}">
-        <h1>Tem certeza que deseja fazer logout?</h1>
-        <button type="submit">Sim</button>
+        <h2>Tem certeza que deseja sair?</h2>
+        <button class="confirm-button" type="submit">Sim</button>
 <!--        <a th:href="@{http://www.recepcao-adosasco.com.br:8000}"><button type="button">Não</button></a>-->
-        <a th:href="@{http://localhost:4200}"><button type="button">Não</button></a>
+        <a style="width: 100%; text-align: center;" th:href="@{http://localhost:4200}"><button class="confirm-button" type="button">Não</button></a>
     </form>
 </div>
 </body>
