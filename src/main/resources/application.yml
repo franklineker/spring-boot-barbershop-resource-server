@@ -34,13 +34,14 @@ spring:
           provider:
             google:
               user-name-attribute: email
-              authorization-uri: http://localhost:8081/oauth2/token
+              authorization-uri: ${AUTHORIZATION_URI}
 
 config:
   uris:
     issuer-uri: ${ISSUER_URI}
     logout-uri: ${LOGOUT_URI}
     angular-uri: ${ANGULAR_URI}
+    save-client-uri: ${SAVE_CLIENT_URI}
 
 logging:
   level:

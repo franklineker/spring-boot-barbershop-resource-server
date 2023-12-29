@@ -1,33 +1,93 @@
-html,
-body {
-  height: 100%;
-  background-color: FED;
+* {
+    color: white;
 }
 
 body {
-  display: flex;
-  align-items: start;
-  padding-top: 100px;
-  background-color: #f5f5f5;
+    background-color: #000;
 }
 
-.form-signin {
-  max-width: 330px;
-  padding: 15px;
+img.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.4;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
 }
 
-.form-signin .form-floating:focus-within {
-  z-index: 2;
+.container {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
-.form-signin input[type="username"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+h2 {
+    text-align: center;
+    margin: 0 0 20px;
 }
 
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+form {
+    display: flex;
+    width: 300px;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px 30px;
+    margin: 0 15px;
 }
+
+input {
+    background: rgba(0, 0, 0, 0.0);
+    border: none;
+    border-bottom: 3px solid white;
+    margin: 10px 0;
+    outline: none;
+    font-size: 16px;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+    -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0.9) inset;
+}
+
+a {
+    text-decoration: none;
+    margin: 5px 0;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+.options {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.login-google {
+    display: flex;
+    border: none;
+    background-color: #4286F5;
+    color: black;
+    align-items: center;
+}
+
+.login-button {
+    background-color: #FFCE2E;
+    font-size: 16px;
+    color: black;
+    width: 100%;
+    padding: 9px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+

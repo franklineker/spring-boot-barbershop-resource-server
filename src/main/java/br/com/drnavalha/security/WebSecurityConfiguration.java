@@ -53,10 +53,12 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class WebSecurityConfiguration {
 
     @Value("${config.uris.logout-uri}")
-    private String logoutUrl;
+    private String logoutUri;
 
     @Value("${config.uris.issuer-uri}")
     private String issuerUri;
+    @Value("${config.uris.save-client-uri")
+    private String saveClientUri;
     private final UserRepository userRepository;
     @Bean
     @Order(1)
@@ -94,7 +96,8 @@ public class WebSecurityConfiguration {
                         .requestMatchers(
                                 "/auth/**",
                                 "/client/**",
-                                "/login").permitAll()
+                                "/login",
+                                "/assets/**").permitAll()
                         .anyRequest().authenticated()
                 );
         http
@@ -104,7 +107,7 @@ public class WebSecurityConfiguration {
                             .loginPage("/login")
                             .successHandler(authenticationSuccessHandler());
                 });
-        http.logout(logout -> logout.logoutSuccessUrl(logoutUrl));
+        http.logout(logout -> logout.logoutSuccessUrl(logoutUri));
         http.csrf(c -> c.ignoringRequestMatchers(
                 "/auth/**",
                 "/client/**",
@@ -192,7 +195,7 @@ public class WebSecurityConfiguration {
 
     private AuthenticationSuccessHandler authenticationSuccessHandler () {
         BarbershopIdentityAuthenticationSuccessHandler successHandler = new BarbershopIdentityAuthenticationSuccessHandler();
-        successHandler.setOAuth2UserHandler(new UserRepositoryOAuth2UserHandler(userRepository));
+        successHandler.setOAuth2UserHandler(new UserRepositoryOAuth2UserHandler(userRepository, saveClientUri));
 
         return successHandler;
     }

@@ -1,41 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dr. Navalha Login</title>
-<!--    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.css" th:href="@{/webjars/bootstrap/css/bootstrap.css}" />-->
-<!--    <link rel="stylesheet" type="text/css" href="/assets/css/signin.css" th:href="@{/assets/css/signin.css}" />-->
+    <link rel="stylesheet" href="" th:href="@{/assets/css/signin.css}">
 </head>
 <body>
+<img src="/assets/img/main-bg-image.jpeg" class="background">
 <div class="container">
-    <form class="form-signin w-100 m-auto" method="post" th:action="@{/login}">
+    <form class="" method="post" th:action="@{/login}">
         <div th:if="${param.error}" class="alert alert-danger" role="alert">
             Usuário ou senha inválidos.
         </div>
         <div th:if="${param.logout}" class="alert alert-success" role="alert">
             Você saiu.
         </div>
-        <h1 class="h3 mb-3 fw-normal">Faça login para entrar</h1>
-        <div class="form-floating">
-            <input type="text" id="username" name="username" class="form-control" required autofocus>
-            <label for="username">Usuário</label>
-        </div>
-        <div class="form-floating">
-            <input type="password" id="password" name="password" class="form-control" required>
-            <label for="password">Senha</label>
-        </div>
-        <div>
-            <button class="w-100 btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
-            <a class="w-100 btn btn-light btn-block bg-white" href="/oauth2/authorization/google" style="margin-top: 10px">
-<!--                <img src="/assets/img/google.png" th:src="@{/assets/img/google.png}" width="20" style="margin-right: 5px;" alt="Sign in with Google">-->
-                Entrar com Google
+        <h2>Faça login para entrar</h2>
+        <label for="username">Usuário</label>
+        <input type="text" id="username" name="username" class="form-control" required autofocus>
+        <label for="password">Senha</label>
+        <input type="password" id="password" name="password" class="form-control" required>
+        <div class="options">
+            <button class="login-button" type="submit">Entrar</button>
+            <!--            <a href="http://www.recepcao-adosasco.com.br:8000" style="decoration: none;"><button type="button">Voltar ao início</button></a>-->
+            <!--            <a href="http://www.recepcao-adosasco.com.br:8000/register" style="decoration: none;"><button type="button">Registre-se</button></a>-->
+            <a href="http://localhost:4200" style="decoration: none;">
+                Voltar ao início
             </a>
-            <a href="http://34.29.168.109:8000" style="decoration: none;"><button type="button">Voltar ao início</button></a>
-            <a href="http://34.29.168.109:8000/register" style="decoration: none;"><button type="button">Registre-se</button></a>
-<!--            <a href="http://localhost:4200" style="decoration: none;"><button type="button">Voltar ao início</button></a>-->
-<!--            <a href="http://localhost:4200/register" style="decoration: none;"><button type="button">Registre-se</button></a>-->
+            <a href="http://localhost:4200/register" style="decoration: none;">
+                Registre-se
+            </a>
+            <p style="align-text: center"> ----- ou -----</p>
         </div>
+            <a class="login-google" href="/oauth2/authorization/google"
+               style="margin-top: 10px">
+                <img src="" th:src="@{/assets/img/googleicon.png}" width="40" style="margin-right: 5px;"
+                     alt="Sign in with Google">
+                <span style="margin-left: 55px">Entrar com Google</span>
+            </a>
     </form>
 </div>
 </body>

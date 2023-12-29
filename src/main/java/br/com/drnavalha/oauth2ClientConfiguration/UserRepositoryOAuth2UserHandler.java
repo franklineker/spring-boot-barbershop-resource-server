@@ -22,6 +22,7 @@ import java.util.function.Consumer;
 public class UserRepositoryOAuth2UserHandler implements Consumer<OAuth2User> {
 
     private final UserRepository userRepository;
+    private final String saveClientUri;
 
     @Override
     public void accept(OAuth2User oAuth2User) {
@@ -44,8 +45,6 @@ public class UserRepositoryOAuth2UserHandler implements Consumer<OAuth2User> {
         System.out.println("entrou no create client");
         RestTemplate restTemplate = new RestTemplate();
 
-        String url = "http://34.29.168.109:9000/clients/save";
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -57,7 +56,7 @@ public class UserRepositoryOAuth2UserHandler implements Consumer<OAuth2User> {
         JsonObject json = g.fromJson(requestBody, JsonObject.class);
         System.out.println(requestBody);
         HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, requestEntity, String.class);
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(saveClientUri, requestEntity, String.class);
 
         String response = responseEntity.getBody();
 
